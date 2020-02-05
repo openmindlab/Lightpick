@@ -1095,7 +1095,7 @@
       }
 
       if (window.innerWidth < 480 && opts.numberOfMonths > 1) {
-        opts.numberOfMonths = 1;
+        // opts.numberOfMonths = 1;
         opts.numberOfColumns = 1;
       }
 
@@ -1163,7 +1163,9 @@
     gotoDate: function(date) {
       var date = moment(date, this._opts.format);
 
-      if (!date.isValid()) {
+      if (this._opts.customDate && !date.isValid()) {
+        date = moment(this._opts.customDate, this._opts.format)
+      } else if (!this._opts.customDate && !date.isValid()) {
         date = moment();
       }
 
